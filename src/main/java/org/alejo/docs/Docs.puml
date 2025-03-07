@@ -1,0 +1,112 @@
+@startuml
+' ======== Clases del Modelo ========
+class User {
+  - int id
+  - String name
+  - String email
+}
+
+class Product {
+  - int id
+  - String name
+  - double price
+  - int stock
+}
+
+class Order {
+  - int id
+  - int userId
+  - int productId
+  - int quantity
+  - LocalDateTime orderDate
+}
+
+' ======== DTOs con Atributos Privados ========
+class UserDTO {
+  - int id
+  - String name
+  - String email
+}
+
+class ProductDTO {
+  - int id
+  - String name
+  - double price
+}
+
+class OrderDTO {
+  - int id
+  - int userId
+  - int productId
+  - int quantity
+  - LocalDateTime orderDate
+}
+
+' ======== Interfaces DAO ========
+interface GenericDAO<T> {
+  + List<T> getAll()
+  + T getById(int id)
+  + void insert(T entity)
+  + void update(T entity)
+  + void delete(int id)
+}
+
+interface UserDAO {
+  + List<User> getAll()
+  + User getById(int id)
+  + void insert(User user)
+  + void update(User user)
+  + void delete(int id)
+}
+
+interface ProductDAO {
+  + List<Product> getAll()
+  + Product getById(int id)
+  + void insert(Product product)
+  + void update(Product product)
+  + void delete(int id)
+}
+
+interface OrderDAO {
+  + List<Order> getAll()
+  + Order getById(int id)
+  + void insert(Order order)
+  + void update(Order order)
+  + void delete(int id)
+}
+
+' ======== Mappers ========
+class UserMapper {
+  + UserDTO toDTO(User user)
+  + User toEntity(UserDTO userDTO)
+}
+
+class ProductMapper {
+  + ProductDTO toDTO(Product product)
+  + Product toEntity(ProductDTO productDTO)
+}
+
+class OrderMapper {
+  + OrderDTO toDTO(Order order)
+  + Order toEntity(OrderDTO orderDTO)
+}
+
+' ======== Relaciones ========
+GenericDAO <|.. UserDAO
+GenericDAO <|.. ProductDAO
+GenericDAO <|.. OrderDAO
+
+UserDAO --> User
+ProductDAO --> Product
+OrderDAO --> Order
+
+UserMapper --> User
+UserMapper --> UserDTO
+
+ProductMapper --> Product
+ProductMapper --> ProductDTO
+
+OrderMapper --> Order
+OrderMapper --> OrderDTO
+
+@enduml
