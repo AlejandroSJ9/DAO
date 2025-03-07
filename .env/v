@@ -1,0 +1,3 @@
+DB_URL_TIENDA=jdbc:postgresql://localhost:5432/mi_bd
+DB_USER=usuario
+DB_PASSWORD=clave
