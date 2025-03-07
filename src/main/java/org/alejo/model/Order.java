@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class Order {
     private Integer id;
     private Integer userId;
-    private Integer orderId;
+    private Integer productId;
     private Integer quantity;
     private LocalDateTime orderDate;
 }
