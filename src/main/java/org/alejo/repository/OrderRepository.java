@@ -14,12 +14,12 @@ public class OrderRepository implements OrderDAO {
     private final OrderMapper orderMapper = OrderMapper.INSTANCE;
     @Override
     public List<Order> getAll() {
-        String query = "SELECT * FROM order";
+        String query = "SELECT * FROM orders";
         List<Order> orders = new ArrayList<>();
         try(Connection conn = DataBaseConnection.getConnection();
             PreparedStatement ps = conn.prepareStatement(query)){
 
-            ResultSet result = ps.executeQuery(query);
+            ResultSet result = ps.executeQuery();
             while (result.next()) {
                 orders.add(orderMapper.toEntity(new OrderDTO(
                         result.getInt("id"),
