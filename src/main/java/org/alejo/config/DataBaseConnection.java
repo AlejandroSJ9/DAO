@@ -1,5 +1,6 @@
 package org.alejo.config;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -9,14 +10,9 @@ public class DataBaseConnection {
 
     public static Connection getConnection() throws SQLException {
         if (connection == null || connection.isClosed()) {
-            String url = System.getenv("DB_URL_TIENDA");
-            String user = System.getenv("DB_USER");
-            String password = System.getenv("DB_PASSWORD");
-
-            if (url == null || user == null || password == null) {
-                throw new IllegalStateException("Las variables de entorno no están configuradas.");
-            }
-
+            String url = "jdbc:postgresql://localhost:5432/tienda";
+            String user = "postgres";
+            String password = "postgres";
             connection = DriverManager.getConnection(url, user, password);
             System.out.println("✅ Conexión exitosa a la base de datos");
         }

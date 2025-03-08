@@ -23,12 +23,16 @@ public class UserRepository implements UserDAO {
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                users.add(userMapper.toEntity(new UserDTO(rs.getInt("id"), rs.getString("name"), rs.getString("email"))));
+                users.add(userMapper.toEntity(new UserDTO(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"))));
             }
+            return users;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return users;
+        return null;
     }
 
     @Override
@@ -39,7 +43,7 @@ public class UserRepository implements UserDAO {
             stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-            return userMapper.toEntity(new UserDTO( rs.getInt("id"), rs.getString("name"), rs.getString("email")));
+                return userMapper.toEntity(new UserDTO( rs.getInt("id"), rs.getString("name"), rs.getString("email")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
